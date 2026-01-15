@@ -22,5 +22,13 @@ spec:
         image: menachemkazido/threat-api:v1
         ports:
         - containerPort: 8000
+        emv:
+          - name: MONGO_HOST
+            value: mongo-0.mongo
+          - name: MONGO_PORT
+            value: "27017"
+          - name: MONGO_DB
+            value: threat_db
+
 
 
