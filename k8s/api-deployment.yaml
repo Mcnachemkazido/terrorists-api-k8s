@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threat-api
+  labels:
+    app: threat-api
+    tier: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: threat-api
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: threat-api
+        tier: backend
+    spec:
+      containers:
+      - name: threat-api
+        image: menachemkazido/threat-api:v1
+        ports:
+        - containerPort: 8000
+
+

@@ -1,0 +1,40 @@
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: mongo
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+      database: tier
+  template:
+    metadata:
+      labels:
+        app: mongo
+        database: tier
+    spec:
+      containers:
+      - name: mongo
+        image: docker.io/library/mongo:7
+        ports:
+        - containerPort: 27017
+          name: web
+        volumeMounts:
+        - name: mongo-data
+          mountPath: data/db/
+        env:
+          - name: MONGO_INITDB_DATABASE
+            value: threat_db
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+

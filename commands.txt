@@ -1,0 +1,2 @@
+ docker build -t menachemkazido/threat-api:v1 .
+ docker push menachemkazido/threat-api:v1
